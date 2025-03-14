@@ -4,7 +4,7 @@ from datetime import datetime
 
 from flask import Flask
 from API import client
-
+from 
 app = Flask(__name__)
 
 database = client['connisewer']
@@ -26,7 +26,7 @@ class User:
         self.dictRatings = ratings  
 
 # add user
-def addUser(name, profile_pic, email, reviews, ratings):
+def addUser(name, profile_pic, email):
     user = User(name, ObjectId(), profile_pic, email, reviews, ratings) # make user
     collection.insert_one(user.to_dict())   # add user to collection/database
     return user
