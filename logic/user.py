@@ -32,8 +32,10 @@ class User:
         self.arrayReviews.append(review.to_dict())  # Add review to the reviews array
         return review
 
+    # deleting a review
     def deleteReview(self, reviewId):
-        
+        query = { "_id": ObjectId(reviewId) }
+        return collection.delete_one(query)        
 
 # add user
 def addUser(name, profile_pic, email, reviews, ratings):
