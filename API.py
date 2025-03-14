@@ -1,6 +1,4 @@
 # APIs here
-import pymongo
-
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 # importing os module for environment variables
