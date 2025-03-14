@@ -15,15 +15,15 @@ class User:
     # id = string
     # email = string
     # profile_pic = ????
-    # reviews = array
-    # ratings = array
+    # reviews = array (dictionary)
+    # ratings = array (dictionary)
     def __init__(self, name, id, profile_pic, email, reviews, ratings):
         self._id = id
         self.name = name
         self.profile_pic = profile_pic
         self.email = email
-        self.arrayReviews = reviews
-        self.arrayRatings = ratings  
+        self.dictReviews = reviews
+        self.dictRatings = ratings  
 
 # add user
 def addUser(name, profile_pic, email, reviews, ratings):
