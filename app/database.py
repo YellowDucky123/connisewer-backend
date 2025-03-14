@@ -20,7 +20,7 @@ try:
     client = connect()
     client.admin.command('ping')
 
-    print("Connected to database")
+    print("Connected to the database")
 
     database = client["connisewer"] 
     

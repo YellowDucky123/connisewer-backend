@@ -1,7 +1,7 @@
 from . import App
 from bson import json_util
 from .logic import toilet
-from .logic import user
+from .action import user
 import json
 from .database import client, database
 
@@ -19,6 +19,7 @@ def hello():
 
 @App.route("/toilets/search=<query>", methods=['GET'])
 def search(query):
+    print("aaa")
     curs = toilets.find({ "title": {"$regex": query}})
     return json.loads(json_util.dumps(curs))
     
@@ -43,9 +44,10 @@ def toJSON(thing):
 #---------------------------------------------------------------------------------------#
 
 # add a user
-@App.route('/user/add/name=<name>/email=<email>/', methods=['POST'])
+@App.route('/user/add/name=<name>/email=<email>', methods=['POST'])
 def registerUser(name, email):
-    return toJSON(user.addUser(name, None, email))
+    user.register(name, email)
+    return "success"
 
 # # delete a user
 # @App.route('/', methods=['DELETE'])
