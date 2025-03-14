@@ -1,5 +1,5 @@
 from flask import Flask
-from API import client
+from app.database import client
 
 app = Flask(__name__)
 
