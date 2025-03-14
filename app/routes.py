@@ -36,7 +36,7 @@ def get_db():
     return client['catalyst']
 
 def toJSON(thing):
-    return json.loads(json.dumps(thing))
+    return json.loads(json_util.dumps(thing))
 
 #---------------------------------------------------------------------------------------#
 #------------------------------------ USER ROUTES --------------------------------------#

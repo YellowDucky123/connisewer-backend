@@ -6,36 +6,28 @@ import os
 # importing necessary functions from dotenv library
 from dotenv import load_dotenv, dotenv_values 
 # loading variables from .env file
-load_dotenv() 
-# # accessing and printing value
-# print(os.getenv(&quot;MY_KEY&quot;))
 
-# connect to database
-uri = "mongodb+srv://connisewer:" + os.getenv("password") + "@connisewer.wljsc.mongodb.net/?retryWrites=true&w=majority&appName=connisewer"
-# Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+def connect():
+    load_dotenv() 
+    password = os.getenv('password')
+    if password == None:
+        raise Exception("No password in the environment")
+    uri = "mongodb+srv://connisewer:" + password  + "@connisewer.wljsc.mongodb.net/?retryWrites=true&w=majority&appName=connisewer"
+    client = MongoClient(uri, server_api=ServerApi('1'))
+    return client
 
-database = client["connisewer"] 
-
-if not hasattr(database, 'toilets'):
-    database.create_collection('toilets')
-
-if not hasattr(database, 'user'):
-    database.create_collection('user')
-
-if not hasattr(database, 'review'):
-    database.create_collection('review')
-# Send a ping to confirm a successful connection
 try:
+    client = connect()
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
 
-    # database = client["test_database"]
-    # database.create_collection("example_collection")
+    print("Connected to database")
 
-    # collection_list = database.list_collections()
-    # for c in collection_list:
-    #     print(c)
+    database = client["connisewer"] 
+    
+    for name in ['toilets', 'users', 'reviews']:
+        if not hasattr(database, name):
+            database.create_collection(name)
+
 except Exception as e:
     print(e)
 
