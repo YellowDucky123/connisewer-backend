@@ -23,19 +23,7 @@ class User:
         self.profile_pic = profile_pic
         self.email = email
         self.arrayReviews = reviews
-        self.arrayRatings = ratings
-
-    # add review
-    def addReview(self, text):
-        date = datetime.now()  # Use current date
-        review = Review(ObjectId(), self.name, text, date)
-        self.arrayReviews.append(review.to_dict())  # Add review to the reviews array
-        return review
-
-    # deleting a review
-    def deleteReview(self, reviewId):
-        query = { "_id": ObjectId(reviewId) }
-        return collection.delete_one(query)        
+        self.arrayRatings = ratings  
 
 # add user
 def addUser(name, profile_pic, email, reviews, ratings):

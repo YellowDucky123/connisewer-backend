@@ -27,16 +27,14 @@ def get_db():
 #------------------------------------ USER ROUTES --------------------------------------#
 #---------------------------------------------------------------------------------------#
 
+# add a user
 @app.route('/', methods=['POST'])
 def addUser():
     return user.addUser(insert name, insert id)
 
+# delete a user
 @app.route('/', methods=['DELETE'])
 def deleteUser():
-    
-
-@app.route('/', methods=['POST'])
-def addReview():
 
 
 
@@ -44,9 +42,15 @@ def addReview():
 #------------------------------------ REVIEW ROUTES ------------------------------------#
 #---------------------------------------------------------------------------------------#
 
+# user makes a review
 @app.route('/', methods=['POST'])
-def register():
-    return user.register_user(get_db()) # function to register user
+def makeReview(userId):
+    
+
+# user deletes a review
+@app.route('/', methods=['DELETE'])
+def u
+
 
 #---------------------------------------------------------------------------------------#
 #------------------------------------ TOILET ROUTES ------------------------------------#
