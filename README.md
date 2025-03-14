@@ -13,6 +13,7 @@ The database contain the following collecions:
     email: string,
     // profile_picture: string,
     reviews: [ObjectId],
+    ratings: [ObjectId]
 }
 ```
 
@@ -24,6 +25,7 @@ The database contain the following collecions:
     title: string,
     description: string,
     location: [float, float],
+    rating: float,
     reviews: [ObjectId]
 }
 ```
@@ -40,4 +42,13 @@ The database contain the following collecions:
 }
 ```
 
+### ratings
 
+```
+{
+    _id: ObjectId,
+    value: int,
+    user_id: ObjectId,
+    toilet_id: ObjectId,
+}
+```
