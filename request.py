@@ -1,4 +1,6 @@
 from flask import Flask
+from logic import toilet
+from logic import user
 from API import client
 
 app = Flask(__name__)
@@ -32,3 +34,5 @@ def register():
 #---------------------------------------------------------------------------------------#
 #------------------------------------ TOILET ROUTES ------------------------------------#
 #---------------------------------------------------------------------------------------#
+
+@app.route('/', methods=['POST'])
