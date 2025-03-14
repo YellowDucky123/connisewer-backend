@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 from flask import Flask
-from API import client
+from app.database import client
 
 app = Flask(__name__)
 
@@ -33,3 +33,4 @@ class Review:
     def deleteReview(self, reviewId):
         query = { "_id": ObjectId(reviewId) }
         return collection.delete_one(query)      
+    
