@@ -4,7 +4,7 @@ from API import client
 app = Flask(__name__)
 
 database = client['connisewer']
-collection = database('toilet')
+collection = database('toilets')
 
 class User:
     def __init__(self, name, id):

@@ -8,8 +8,7 @@ database = client['connisewer']
 class Toilet:
     def __init__(self, id, longitude, latitude, title, desc, rating, user):
         self.id = id
-        self.longitude = longitude  # Assigns input parameter to instance variable
-        self.latitude = latitude
+        self.location = {longitude, latitude}
         self.title = title
         self.desc = desc
         self.rating = rating
