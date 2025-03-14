@@ -60,7 +60,8 @@ def makeReview():
     user_id = request.args["user_id"]
     toilet_id = request.args["toilet_id"]
     text = request.args["text"]
-    user.post_review(user_id, toilet_id, text)
+    rating = int(request.args["rating"])
+    user.post_review(user_id, toilet_id, text, rating)
     return "success"
 
 

@@ -24,13 +24,14 @@ try:
 
     database = client["connisewer"] 
     
-    for name in ['toilets', 'users', 'reviews']:
+    for name in ['toilets', 'users', 'reviews', 'ratings']:
         if not hasattr(database, name):
             database.create_collection(name)
 
     toilets = database["toilets"]
     users = database["users"]
     reviews = database["reviews"]
+    ratings = database["ratings"]
 
 except Exception as e:
     print(e)

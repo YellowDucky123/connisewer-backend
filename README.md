@@ -25,7 +25,7 @@ The database contain the following collecions:
     title: string,
     description: string,
     location: [float, float],
-    rating: float,
+    ratings: [ObjectId],
     reviews: [ObjectId]
 }
 ```
