@@ -1,5 +1,6 @@
 from . import App
 from .action import user
+from .action import toilet
 from .database import client, database
 from flask import request
 from .utils import to_json
@@ -76,4 +77,10 @@ def makeReview():
 # #------------------------------------ TOILET ROUTES ------------------------------------#
 # #---------------------------------------------------------------------------------------#
 #
-# @App.route('/', methods=['POST'])
+@App.route('/toilets/minLat=<minLat>/minLong=<minLong>/maxLat=<maxLat>/maxLong=<maxLong>', methods=['GET'])
+def retrieveToilet(minLat, minLong, maxLat, maxLong):
+    return to_json(toilet.getToilet(minLat, minLong, maxLat, maxLong))
+
+@App.route('/toilets/rating=<rating>', methods=['GET'])
+def ratingGet(rating):
+    return to_json(toilet.searchByRating(rating))
