@@ -1,7 +1,5 @@
 from BSON import ObjectId
 from datetime import datetime
-
-
 from flask import Flask
 from API import client
 
@@ -9,7 +7,7 @@ app = Flask(__name__)
 
 database = client['connisewer']
 collection = database['reviews']
-userCollection = database.user
+userCollection = database['user']
 
 class Review: 
     def __init__(self, id, name, text, date):
@@ -23,7 +21,7 @@ class Review:
     def addReview(self, userId, text):
         query = { "_id": ObjectId(userId) }
         
-        user = userCollection.find(query)
+        user = userCollection.find(query)   # find user
 
         date = datetime.now()  # Use current date
 
@@ -43,9 +41,8 @@ class Review:
 
         queryReview = { "_id": ObjectId(reviewId) }
 
-        user = database.user.find(queryUser)
-
-        # delete the review in the user array
-        user.dictReviews.pop(reviewId)
+        user = database.user.find(queryUser)    # find user
+        user.dictReviews.pop(reviewId)  # delete the review in the user array
+        userCollection.update_one(queryUser, user)  # update the user array in the "user database"
 
         return collection.delete_one(queryReview)      
