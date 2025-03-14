@@ -1,7 +1,5 @@
-from app.database import database
+from app.database import reviews
 from datetime import datetime
-
-reviews = database["reviews"]
 
 def create_review(user_id, toilet_id, text):
     return reviews.insert_one({"text": text, 

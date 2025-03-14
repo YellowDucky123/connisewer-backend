@@ -1,9 +1,8 @@
 from . import App
-from bson import json_util
 from .action import user
-import json
 from .database import client, database
 from flask import request
+from .utils import to_json
 
 
 toilets = database['toilets']
@@ -19,9 +18,8 @@ def hello():
 
 @App.route("/toilets/search=<query>", methods=['GET'])
 def search(query):
-    print("aaa")
     curs = toilets.find({ "title": {"$regex": query}})
-    return json.loads(json_util.dumps(curs))
+    return to_json(curs)
     
 database = client["test_database"]
 collection_list = database.list_collections()
@@ -35,9 +33,6 @@ def get_db():
     if App.config.get('TESTING'):
         return client['test_db']
     return client['catalyst']
-
-def toJSON(thing):
-    return json.loads(json_util.dumps(thing))
 
 #---------------------------------------------------------------------------------------#
 #------------------------------------ USER ROUTES --------------------------------------#

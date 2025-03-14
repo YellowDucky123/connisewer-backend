@@ -28,6 +28,10 @@ try:
         if not hasattr(database, name):
             database.create_collection(name)
 
+    toilets = database["toilets"]
+    users = database["users"]
+    reviews = database["reviews"]
+
 except Exception as e:
     print(e)
 
