@@ -14,19 +14,29 @@ load_dotenv()
 uri = "mongodb+srv://connisewer:" + os.getenv("password") + "@connisewer.wljsc.mongodb.net/?retryWrites=true&w=majority&appName=connisewer"
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
+
 database = client["connisewer"] 
+
+if not hasattr(database, 'toilets'):
+    database.create_collection('toilets')
+
+if not hasattr(database, 'user'):
+    database.create_collection('user')
+
+if not hasattr(database, 'review'):
+    database.create_collection('review')
 # Send a ping to confirm a successful connection
-# try:
-#     client.admin.command('ping')
-#     print("Pinged your deployment. You successfully connected to MongoDB!")
-#
-#     database = client["test_database"]
-#     database.create_collection("example_collection")
-#
-#     collection_list = database.list_collections()
-#     for c in collection_list:
-#         print(c)
-# except Exception as e:
-#     print(e)
-#
-#
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+
+    # database = client["test_database"]
+    # database.create_collection("example_collection")
+
+    # collection_list = database.list_collections()
+    # for c in collection_list:
+    #     print(c)
+except Exception as e:
+    print(e)
+
+

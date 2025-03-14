@@ -35,18 +35,21 @@ def get_db():
         return client['test_db']
     return client['catalyst']
 
+def toJSON(thing):
+    return json.loads(json.dumps(thing))
+
 #---------------------------------------------------------------------------------------#
 #------------------------------------ USER ROUTES --------------------------------------#
 #---------------------------------------------------------------------------------------#
 
 # add a user
-@App.route('/user/add', methods=['POST'])
-def addUser():
-    return user.addUser(insert name, insert id)
+@App.route('/user/add/name=<name>/email=<email>/', methods=['POST'])
+def registerUser(name, email):
+    return toJSON(user.addUser(name, None, email))
 
-# delete a user
-@App.route('/', methods=['DELETE'])
-def deleteUser():
+# # delete a user
+# @App.route('/', methods=['DELETE'])
+# def deleteUser():
 #
 #
 #

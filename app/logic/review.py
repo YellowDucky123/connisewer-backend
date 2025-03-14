@@ -1,11 +1,7 @@
 from bson import ObjectId
 from datetime import datetime
-from flask import Flask
-from app.database import client
+from app.database import database
 
-app = Flask(__name__)
-
-database = client['connisewer']
 collection = database['reviews']
 userCollection = database['user']
 
