@@ -1,3 +1,7 @@
+from .review import Review
+from BSON import ObjectId
+from datetime import datetime
+
 from flask import Flask
 from API import client
 
@@ -14,17 +18,28 @@ class User:
     # reviews = array
     # ratings = array
     def __init__(self, name, id, profile_pic, email, reviews, ratings):
-        self.id = id
+        self._id = id
         self.name = name
         self.profile_pic = profile_pic
         self.email = email
         self.arrayReviews = reviews
         self.arrayRatings = ratings
 
+    # add review
+    def addReview(self, text):
+        date = datetime.now()  # Use current date
+        review = Review(ObjectId(), self.name, text, date)
+        self.arrayReviews.append(review.to_dict())  # Add review to the reviews array
+        return review
+
+    def deleteReview(self, reviewId):
+        
 
 # add user
-def addUser(name, id, profile_pic, email, reviews, ratings):
-    user = User(name, id, profile_pic, email, reviews, ratings) # make user
+def addUser(name, profile_pic, email, reviews, ratings):
+    user = User(name, ObjectId(), profile_pic, email, reviews, ratings) # make user
     collection.insert_one(user.to_dict())   # add user to collection/database
+    return user
+
 
     

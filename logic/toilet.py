@@ -7,7 +7,7 @@ database = client['connisewer']
 
 class Toilet:
     def __init__(self, id, longitude, latitude, title, desc, rating, user):
-        self.id = id
+        self._id = id
         self.location = {longitude, latitude}
         self.title = title
         self.desc = desc

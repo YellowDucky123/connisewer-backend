@@ -17,6 +17,7 @@ for c in collection_list:
 def hello():
     return result
 
+# this might not be used in this
 def get_db():
     if app.config.get('TESTING'):
         return client['test_db']
@@ -29,6 +30,15 @@ def get_db():
 @app.route('/', methods=['POST'])
 def addUser():
     return user.addUser(insert name, insert id)
+
+@app.route('/', methods=['DELETE'])
+def deleteUser():
+    
+
+@app.route('/', methods=['POST'])
+def addReview():
+
+
 
 #---------------------------------------------------------------------------------------#
 #------------------------------------ REVIEW ROUTES ------------------------------------#
