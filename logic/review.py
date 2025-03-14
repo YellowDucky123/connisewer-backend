@@ -7,7 +7,7 @@ database = client['connisewer']
 
 class Review: 
     def __init__(self, name, text, date):
-        self.name = name
+        self.userId = name
         self.text = text
         self.date = date
     
