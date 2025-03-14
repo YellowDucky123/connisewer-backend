@@ -1,9 +1,9 @@
 from . import App
 from bson import json_util
-from .logic import toilet
 from .action import user
 import json
 from .database import client, database
+from flask import request
 
 
 toilets = database['toilets']
@@ -59,10 +59,17 @@ def registerUser(name, email):
 # #------------------------------------ REVIEW ROUTES ------------------------------------#
 # #---------------------------------------------------------------------------------------#
 #
-# # user makes a review
-# @App.route('/', methods=['POST'])
-# def makeReview(userId):
-#     
+# user makes a review
+@App.route('/user/post-review', methods=['POST'])
+def makeReview():
+    user_id = request.args["user_id"]
+    toilet_id = request.args["toilet_id"]
+    text = request.args["text"]
+    user.post_review(user_id, toilet_id, text)
+    return "success"
+
+
+    
 #
 # # user deletes a review
 # @App.route('/', methods=['DELETE'])
