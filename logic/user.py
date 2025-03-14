@@ -46,5 +46,5 @@ def addUser(name, profile_pic, email, reviews, ratings):
 # delete user
 def deleteUser(userId):
     query = { "_id": ObjectId(userId) }
-        return collection.delete_one(query)   
+    return collection.delete_one(query)   
     
