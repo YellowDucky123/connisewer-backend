@@ -1,10 +1,10 @@
 from .review import Review
-from BSON import ObjectId
+from bson import ObjectId
 from datetime import datetime
 
 from flask import Flask
-from API import client
-from 
+from app.database import client
+
 app = Flask(__name__)
 
 database = client['connisewer']
