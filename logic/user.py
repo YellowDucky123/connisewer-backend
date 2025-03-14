@@ -8,7 +8,7 @@ from API import client
 app = Flask(__name__)
 
 database = client['connisewer']
-collection = database['toilets']
+collection = database['user']
 
 class User:
     # name = string
@@ -43,5 +43,8 @@ def addUser(name, profile_pic, email, reviews, ratings):
     collection.insert_one(user.to_dict())   # add user to collection/database
     return user
 
-
+# delete user
+def deleteUser(userId):
+    query = { "_id": ObjectId(userId) }
+        return collection.delete_one(query)   
     

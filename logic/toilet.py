@@ -4,6 +4,8 @@ from API import client
 app = Flask(__name__)
 
 database = client['connisewer']
+collection = database['toilets']
+
 
 class Toilet:
     def __init__(self, id, longitude, latitude, title, desc, rating, user):
