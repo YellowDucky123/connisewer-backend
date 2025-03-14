@@ -28,7 +28,7 @@ def get_db():
 
 @app.route('/', methods=['POST'])
 def addUser():
-    return user.addUser()
+    return user.addUser(insert name, insert id)
 
 #---------------------------------------------------------------------------------------#
 #------------------------------------ REVIEW ROUTES ------------------------------------#
