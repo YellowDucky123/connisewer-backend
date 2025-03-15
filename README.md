@@ -62,6 +62,9 @@ delete()
 ```
 GET /toilets/search
 search(query) => [Toilet]
+
+GET /user/id=<id>
+user_get(query)
 ```
 
 ### Reviews
