@@ -110,3 +110,5 @@ def login():
     email = request.args['email']
     password = request.args['password']
     return auth.authentication(username, email, password)
+
+@App.route('/login', methods)

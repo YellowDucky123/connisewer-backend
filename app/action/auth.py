@@ -36,6 +36,15 @@ def addNewUserData(email, password):
         "password": hashed_pass
     })
 
+def makeToken(email):
+    user = users.find_one({"email": email})
+    if not user:
+        return "-1"
+    access_token = jwt.create_access_token(identity=user['name'])
+    session[access_token] = user['_id']
+
+    return jsonify(access_token=access_token), 200
+
 def userLogout(access_token):
     res = session.pop(access_token, None)
     if res is None:
