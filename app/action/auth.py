@@ -41,7 +41,7 @@ def makeToken(email):
     access_token = jwt.create_access_token(identity=user['name'])
     session[access_token] = [user['_id'], user['email']]
 
-    return jsonify(access_token=access_token), 200
+    return access_token
 
 def userLogout(access_token):
     res = session.pop(access_token, None)
