@@ -1,6 +1,7 @@
 # APIs here
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from pymongo import ASCENDING, DESCENDING
 # importing os module for environment variables
 import os
 # importing necessary functions from dotenv library
@@ -15,6 +16,14 @@ def connect():
     uri = "mongodb+srv://connisewer:" + password  + "@connisewer.wljsc.mongodb.net/?retryWrites=true&w=majority&appName=connisewer"
     client = MongoClient(uri, server_api=ServerApi('1'))
     return client
+
+def setup_indices():
+    users.create_index("email")
+    ratings.create_index("toilet")
+    ratings.create_index("user")
+    reviews.create_index("toilet")
+    reviews.create_index("user")
+
 
 try:
     client = connect()
@@ -32,6 +41,9 @@ try:
     users = database["users"]
     reviews = database["reviews"]
     ratings = database["ratings"]
+
+    setup_indices()
+
 
 except Exception as e:
     print(e)
