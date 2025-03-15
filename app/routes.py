@@ -70,7 +70,7 @@ def updateReview():
 def getById(id):
     return to_json(user.find_by_id(id))
 
-
+# get reviews by a certain user
 @App.route('/user/id=<id>/reviews', methods=['GET'])
 def get_reviews(id):
     return to_json(user.get_reviews(id))
