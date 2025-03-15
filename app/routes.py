@@ -41,7 +41,7 @@ for c in collection_list:
 #---------------------------------------------------------------------------------------#
 
 # add a user
-@App.route('/user/add', methods=['POST'])
+@App.route('/user/register', methods=['POST'])
 def registerUser():
     data = request.json
     if not data:
