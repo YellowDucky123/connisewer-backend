@@ -9,7 +9,7 @@ from .action import user
 from .action import toilet
 # from .action import auth
 
-@cross_origin(origins=["http://localhost:3000/", "https://connisewer.vercel.app/user"])
+CORS(App, origins=["http://localhost:3000", "https://connisewer.vercel.app"])
 
 toilets = database['toilets']
 
