@@ -38,14 +38,3 @@ The database contain the following collecions:
     toilet_id: ObjectId,
 }
 ```
-
-### ratings
-
-```
-{
-    _id: ObjectId,
-    value: int,
-    user_id: ObjectId,
-    toilet_id: ObjectId,
-}
-```
