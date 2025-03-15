@@ -3,9 +3,12 @@ from .database import client, database
 from .utils import to_json
 from . import App  # Ensure this is after Flask is created
 
+
+
 # Move other imports after app
 from .action import user
 from .action import toilet
+from .action import auth
 
 
 toilets = database['toilets']
