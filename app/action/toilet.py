@@ -17,7 +17,7 @@ def getToilet(minLat, minLong, maxLat, maxLong):
     t = toilets.find({
         'location.0': {'$gte': float(minLat), '$lte': float(maxLat)},  # Latitude
         'location.1': {'$gte': float(minLong), '$lte': float(maxLong)} # longitude
-    })['average rating'] = average(t.ratings)
+    })['rating'] = average(t.ratings)
 
     return t
 

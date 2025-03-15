@@ -40,9 +40,12 @@ for c in collection_list:
 #---------------------------------------------------------------------------------------#
 
 # add a user
-@App.route('/user/add/name=<name>/email=<email>', methods=['POST'])
-def registerUser(name, email):
-    user.register(name, email)
+@App.route('/user/add', methods=['POST'])
+def registerUser():
+    name = request.args['name']
+    email = request.args['email']
+    password = request.args['password']
+    user.register(name, email, password)
     return "success"
 
 # # delete a user
@@ -84,3 +87,14 @@ def retrieveToilet(minLat, minLong, maxLat, maxLong):
 @App.route('/toilets/rating=<rating>', methods=['GET'])
 def ratingGet(rating):
     return to_json(toilet.searchByRating(rating))
+
+# #---------------------------------------------------------------------------------------#
+# #------------------------------------ AUTH ROUTES --------------------------------------#
+# #---------------------------------------------------------------------------------------#
+
+@App.route('/login', methods=['POST'])
+def login():
+    username = request.args['username']
+    email = request.args['email']
+    password = request.args['password']
+    return auth.authentication(username, email, password)

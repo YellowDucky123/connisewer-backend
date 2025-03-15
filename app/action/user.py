@@ -1,7 +1,7 @@
 from app.database import users, toilets
 from app.utils import id_query
 from bson import ObjectId
-from . import review, rating
+from . import review, rating, auth
 
 def find_by_email(email):
     return users.find_one({ "email": email })
@@ -12,7 +12,8 @@ def find_by_name(name):
 def find_by_id(id):
     return users.find_one(id_query(id))
 
-def register(name, email):
+def register(name, email, password):
+    auth.addNewUserData(email, password)
     return users.insert_one({"name": name, "email": email}).inserted_id
     
 
