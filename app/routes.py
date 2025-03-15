@@ -54,8 +54,8 @@ def registerUser():
     if not username or not email or not password:
         return jsonify({"error": "Missing fields"}), 400
 
-    user.register(username, email, password)
-    return jsonify({"message": "success"}), 201
+    token = user.register(username, email, password)
+    return jsonify({"token": token}), 201
 
 # # delete a user
 # @App.route('/', methods=['DELETE'])
