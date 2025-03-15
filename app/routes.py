@@ -72,8 +72,12 @@ def getById(id):
 
 # get reviews by a certain user
 @App.route('/user/id=<id>/reviews', methods=['GET'])
-def get_reviews(id):
+def get_user_reviews(id):
     return to_json(user.get_reviews(id))
+
+@App.route('/toilet/id=<id>/reviews', methods=['GET'])
+def get_toilet_reviews(id):
+    return to_json(toilet.get_reviews(id))
 
 # delete a user
 @App.route('/user/delete/id=<id>', methods=['DELETE'])

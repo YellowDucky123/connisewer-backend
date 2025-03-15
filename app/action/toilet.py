@@ -2,9 +2,8 @@ from app.database import toilets, ratings, reviews
 from app.utils import id_query
 from bson import ObjectId
 
-def add_review(toilet_id, review_id):
-    toilets.update_one(id_query(toilet_id),
-                     { "$push": { "reviews": review_id }})
+def get_reviews(id):
+    return reviews.find({ "toilet": id})
 
 def getToilet(minLat, minLong, maxLat, maxLong):
     def average(ratings):
