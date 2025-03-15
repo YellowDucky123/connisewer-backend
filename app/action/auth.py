@@ -35,3 +35,7 @@ def addNewUserData(email, password):
         "email": email,
         "password": hashed_pass
     })
+
+def userLogout(access_token):
+    session.pop(access_token, None)
+    

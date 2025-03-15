@@ -28,3 +28,6 @@ def post_review(user_id, toilet_id, text, value):
     toilets.update_one(id_query(toilet_id),
                      { "$push": { "reviews": review_id, "ratings": rating_id }})
     
+def remove_review(review_id):
+    review.delete_review(review_id)
+    
