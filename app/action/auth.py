@@ -41,7 +41,7 @@ def makeToken(email):
     if not user:
         return "-1"
     access_token = jwt.create_access_token(identity=user['name'])
-    session[access_token] = user['_id']
+    session[access_token] = [user['_id'], user['email']]
 
     return jsonify(access_token=access_token), 200
 

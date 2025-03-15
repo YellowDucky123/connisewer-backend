@@ -57,9 +57,22 @@ def registerUser():
     token = user.register(username, email, password)
     return jsonify({"token": token}), 201
 
+@App.route('/user/edit', methods=['PUT'])
+def updateReview():
+    id = request.args['review_id']
+    text = request.args['text']
+    rating = request.args['rating']
+    return user.change_review(id, text, rating)
+
+@App.route('/user/id=<id>', methods=['GET'])
+def getById(id):
+    return to_json(user.find_by_id(id))
+
 # # delete a user
 # @App.route('/', methods=['DELETE'])
 # def deleteUser():
+
+    
 #
 #
 #

@@ -22,7 +22,8 @@ def register(name, email, password):
     return jsonify(access_token=token), 200
     
 
-def delete(id):
+def delete(id, email):
+    
     users.delete_one(id_query(id))
 
 def post_review(user_id, toilet_id, text, value):
@@ -35,4 +36,10 @@ def post_review(user_id, toilet_id, text, value):
     
 def remove_review(review_id):
     review.delete_review(review_id)
-    
+
+def change_review(review_id, text, rating):
+    rev = review.update_one({"_id": review_id}, { "text": text, "rating": rating})
+    if rev == 0:
+        return jsonify(message="change failed to process"), 400
+    return jsonify(message="review changed/updated"), 200
+
