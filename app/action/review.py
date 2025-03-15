@@ -11,7 +11,10 @@ def create_review(user_id, toilet_id, text, rating):
                         "date": date}).inserted_id
 
 def delete_review(review_id):
-    reviews.delete_one({"_id": review_id})
-    return jsonify(message="review deleted"), 200
+    return reviews.delete_one({"_id": review_id})
 
+def searchByToiletId(toiletId):
+    r = reviews.find({"toilet": int(toiletId)})
+    print(r)
+    return r
 

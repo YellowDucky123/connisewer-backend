@@ -1,4 +1,4 @@
-from app.database import toilets, ratings
+from app.database import toilets, ratings, reviews
 from app.utils import id_query
 from bson import ObjectId
 
