@@ -38,3 +38,43 @@ The database contain the following collecions:
     toilet_id: ObjectId,
 }
 ```
+
+## API
+
+### Login
+
+```
+POST /user/register
+register(username, email, password)
+
+POST /user/login
+login(email, password)
+
+POST /user/logout
+logout()
+
+DELETE /user/delete
+delete()
+```
+
+### Search
+
+```
+GET /toilets/search
+search(query) => [Toilet]
+```
+
+### Reviews
+
+```
+POST /user/review/post
+post_review(toilet_id, text, rating)  
+
+PUT /user/review/edit
+edit_review(review_id, text, rating)
+
+DELETE /user/review/delete
+delete_review(review_id)
+```
+
+
