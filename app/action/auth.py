@@ -53,7 +53,7 @@ def makeToken(email):
 
     return access_token
 
-def userLogout(access_token):
+def userLogout():
     res = session.pop('user_info', None)
     if res is None:
         return jsonify(message="error: token does not exist"), 400
