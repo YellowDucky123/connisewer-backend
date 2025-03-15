@@ -138,12 +138,19 @@ def ratingGet(rating):
 # #---------------------------------------------------------------------------------------#
 
 # user login
-@App.route('/user/login', methods=['POST'])
 def login():
-    print(request.form)
-    email = request.form['email']
-    password = request.form['password']
-    return auth.authentication(email, password)
+    try:
+        data = request.get_json()  # Use JSON instead of request.form
+        email = data.get("email")
+        password = data.get("password")
+
+        if not email or not password:
+            return jsonify({"message": "Email and password are required"}), 400
+
+        return auth.authentication(email, password)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # user logout
 @App.route('/user/logout', methods=['DELETE'])
