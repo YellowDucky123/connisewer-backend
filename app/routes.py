@@ -111,4 +111,7 @@ def login():
     password = request.args['password']
     return auth.authentication(username, email, password)
 
-# @App.route('/login', methods)
+@App.route('/login', methods=['DELETE'])
+def logout():
+    access_token = request.args['access_token']
+    return auth.userLogout(access_token)
