@@ -80,7 +80,7 @@ def makeReview():
 
 @App.route('/reviews/toiletId=<id>', methods=['GET'])
 def getToiletwithId(id):
-    return review.searchByToiletId(id)
+    return to_json(review.searchByToiletId(id))
 
 #
 # # user deletes a review
