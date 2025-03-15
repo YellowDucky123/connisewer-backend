@@ -1,15 +1,15 @@
 from flask import request
+from flask_cors import CORS
 from .database import client, database
 from .utils import to_json
 from . import App  # Ensure this is after Flask is created
 
-
-
 # Move other imports after app
 from .action import user
 from .action import toilet
-from .action import auth
+# from .action import auth
 
+@cross_origin(origins=["http://localhost:3000/", "https://connisewer.vercel.app/user"])
 
 toilets = database['toilets']
 
@@ -34,11 +34,6 @@ result = ""
 
 for c in collection_list:
     result += "<p>" + c.get("name") + "</p>"
-# this might not be used in this
-def get_db():
-    if App.config.get('TESTING'):
-        return client['test_db']
-    return client['catalyst']
 
 #---------------------------------------------------------------------------------------#
 #------------------------------------ USER ROUTES --------------------------------------#
