@@ -54,8 +54,7 @@ def registerUser():
     if not username or not email or not password:
         return jsonify({"error": "Missing fields"}), 400
 
-    token = user.register(username, email, password)
-    return jsonify({"token": token}), 201
+    return user.register(username, email, password)
 
 # update a review from a user
 @App.route('/user/edit', methods=['PUT'])

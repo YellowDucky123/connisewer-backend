@@ -13,7 +13,7 @@ def getToilet(minLat, minLong, maxLat, maxLong):
         return total / len(ratings)
 
     print(minLat, minLong, maxLat, maxLong)
-    t = toilets.find({
+    t = toilets.find_one({
         'location.0': {'$gte': float(minLat), '$lte': float(maxLat)},  # Latitude
         'location.1': {'$gte': float(minLong), '$lte': float(maxLong)} # longitude
     })['rating'] = average(t.ratings)
