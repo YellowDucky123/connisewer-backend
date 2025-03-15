@@ -35,3 +35,9 @@ def addNewUserData(email, password):
         "email": email,
         "password": hashed_pass
     })
+
+def userLogout(access_token):
+    res = session.pop(access_token, None)
+    if res is None:
+        return jsonify(message="error: token does not exist"), 400
+    return jsonify(message="logged out"), 200

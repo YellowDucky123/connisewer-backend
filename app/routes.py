@@ -7,7 +7,7 @@ from . import App  # Ensure this is after Flask is created
 # Move other imports after app
 from .action import user
 from .action import toilet
-# from .action import auth
+from .action import auth
 
 CORS(App, origins=["http://localhost:3000", "https://connisewer.vercel.app"])
 
