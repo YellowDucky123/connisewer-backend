@@ -1,20 +1,13 @@
 from app.database import users, database, authUsers
 from flask import Flask, session, jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token
-from flask_session import Session
 from app import App
 from hashlib import sha256
 
 # Setup Flask-Session (use server-side sessions)
-App.config['SESSION_TYPE'] = 'filesystem'  # Store session data in the filesystem
-App.config['SECRET_KEY'] = 'your-secret-key'  # Secret key for session encryption
-
-# Initialize Flask-JWT-Extended
-App.config['JWT_SECRET_KEY'] = 'your-jwt-secret-key'  # Secret key for JWT encoding/decoding
 jwt = JWTManager(App)
 
 # Initialize Flask-Session
-Session(App)
 
 # return json
 def authentication(email, password):

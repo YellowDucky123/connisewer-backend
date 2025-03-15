@@ -1,5 +1,6 @@
-from flask import jsonify, request
+from flask import jsonify, request, session
 from flask_cors import CORS
+from flask_session import Session
 from .database import client, database
 from .utils import to_json
 from . import App  # Ensure this is after Flask is created
@@ -79,9 +80,15 @@ def get_toilet_reviews(id):
     return to_json(toilet.get_reviews(id))
 
 # delete a user
-@App.route('/user/delete/id=<id>', methods=['DELETE'])
-def deleteUser(id):
-    user.delete(id)
+@App.route('/user/delete', methods=['DELETE'])
+def deleteUser():
+    res = session.pop("user_info")
+    if res is None:
+        return jsonify(message="error: token does not exist"), 400
+    
+    user.delete(res[0])
+    return jsonify(message="user deleted"), 200
+
     
 
 
@@ -131,15 +138,14 @@ def ratingGet(rating):
 # #---------------------------------------------------------------------------------------#
 
 # user login
-@App.route('/login', methods=['POST'])
+@App.route('/user/login', methods=['POST'])
 def login():
-    username = request.args['username']
-    email = request.args['email']
-    password = request.args['password']
-    return auth.authentication(username, email, password)
+    print(request.form)
+    email = request.form['email']
+    password = request.form['password']
+    return auth.authentication(email, password)
 
 # user logout
-@App.route('/login', methods=['DELETE'])
+@App.route('/user/logout', methods=['DELETE'])
 def logout():
-    access_token = request.args['access_token']
-    return auth.userLogout(access_token)
+    return auth.userLogout()
