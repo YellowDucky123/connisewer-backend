@@ -12,8 +12,6 @@ The database contain the following collecions:
     name: string,
     email: string,
     // profile_picture: string,
-    reviews: [ObjectId],
-    ratings: [ObjectId]
 }
 ```
 
@@ -22,11 +20,10 @@ The database contain the following collecions:
 ```
 {
     _id: ObjectId,
+    location_id: int,
     title: string,
     description: string,
     location: [float, float], // lat, long
-    ratings: [ObjectId],
-    reviews: [ObjectId]
 }
 ```
 
