@@ -1,11 +1,9 @@
-from app.database import users, database
+from app.database import users, database, authUsers
 from flask import Flask, session, jsonify, request
 from flask_jwt_extended import JWTManager
 from flask_session import Session
 from app import App
 from hashlib import sha256
-
-authUsers = database['authUsers']
 
 # Setup Flask-Session (use server-side sessions)
 App.config['SESSION_TYPE'] = 'filesystem'  # Store session data in the filesystem

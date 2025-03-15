@@ -41,6 +41,7 @@ try:
     users = database["users"]
     reviews = database["reviews"]
     ratings = database["ratings"]
+    authUsers = database['authUsers']
 
     setup_indices()
 

@@ -57,6 +57,7 @@ def registerUser():
     token = user.register(username, email, password)
     return jsonify({"token": token}), 201
 
+# update a review from a user
 @App.route('/user/edit', methods=['PUT'])
 def updateReview():
     id = request.args['review_id']
@@ -64,6 +65,7 @@ def updateReview():
     rating = request.args['rating']
     return user.change_review(id, text, rating)
 
+# search for a user based on their user id
 @App.route('/user/id=<id>', methods=['GET'])
 def getById(id):
     return to_json(user.find_by_id(id))
@@ -72,10 +74,11 @@ def getById(id):
 @App.route('/user/id=<id>/reviews', methods=['GET'])
 def get_reviews(id):
     return to_json(user.get_reviews(id))
-# # delete a user
-# @App.route('/', methods=['DELETE'])
-# def deleteUser():
 
+# delete a user
+@App.route('/user/delete/id=<id>', methods=['DELETE'])
+def deleteUser(id):
+    user.delete(id)
     
 #
 #
@@ -94,7 +97,7 @@ def makeReview():
     user.post_review(user_id, toilet_id, text, rating)
     return "success"
 
-
+# get all reviews that has the toilet id
 @App.route('/reviews/toiletId=<id>', methods=['GET'])
 def getToiletwithId(id):
     return to_json(review.searchByToiletId(id))
@@ -109,10 +112,13 @@ def getToiletwithId(id):
 # #------------------------------------ TOILET ROUTES ------------------------------------#
 # #---------------------------------------------------------------------------------------#
 #
+
+# search for toilets on position
 @App.route('/toilets/minLat=<minLat>/minLong=<minLong>/maxLat=<maxLat>/maxLong=<maxLong>', methods=['GET'])
 def retrieveToilet(minLat, minLong, maxLat, maxLong):
     return to_json(toilet.getToilet(minLat, minLong, maxLat, maxLong))
 
+# get a toilet based on rating
 @App.route('/toilets/rating=<rating>', methods=['GET'])
 def ratingGet(rating):
     return to_json(toilet.searchByRating(rating))
@@ -121,6 +127,7 @@ def ratingGet(rating):
 # #------------------------------------ AUTH ROUTES --------------------------------------#
 # #---------------------------------------------------------------------------------------#
 
+# user login
 @App.route('/login', methods=['POST'])
 def login():
     username = request.args['username']
@@ -128,6 +135,7 @@ def login():
     password = request.args['password']
     return auth.authentication(username, email, password)
 
+# user logout
 @App.route('/login', methods=['DELETE'])
 def logout():
     access_token = request.args['access_token']

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from app.database import users, toilets, reviews
+=======
+from app.database import users, toilets, authUsers
+>>>>>>> c0503ed (added comments)
 from flask import jsonify
 from app.utils import id_query
 from bson import ObjectId
@@ -25,8 +29,9 @@ def get_reviews(id):
     return reviews.find({ "user": id} ).limit(20)
     
 
-def delete(id, email):
-    
+def delete(id):
+    userEmail = users.find(id_query(id))['email']
+    authUsers.delete_one({"email": userEmail})
     users.delete_one(id_query(id))
 
 def post_review(user_id, toilet_id, text, value):
