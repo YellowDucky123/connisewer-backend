@@ -13,15 +13,23 @@ App.config['SECRET_KEY'] = 'your-secret-key'  # Secret key for session encryptio
 App.config['JWT_SECRET_KEY'] = 'your-jwt-secret-key'  # Secret key for JWT encoding/decoding
 jwt = JWTManager(App)
 
+# Initialize Flask-Session
+Session(App)
+
 # return json
 def authentication(email, password):
-    userData = authUsers.find({"email": email})
+    userData = authUsers.find_one({"email": email})
     hashed_pass = sha256(password.encode('utf-8')).hexdigest()
-    if hashed_pass == userData:
-        user = users.find({"email": email})
+
+    # checks if the password is right
+    if hashed_pass == userData['password']:
+        user = users.find_one({"email": email})
+
          # Create a JWT token
-        access_token = jwt.create_access_token(identity=user.name)
-        session[access_token] = user._id
+        access_token = jwt.create_access_token(identity=user['name'])
+
+        # Store user ID and email in session as a tuple
+        session['user_info'] = (user['_id'], user['email']) # userId is ObjectId() in this
         
         return jsonify(access_token=access_token), 200
     else:
@@ -39,12 +47,14 @@ def makeToken(email):
     if not user:
         return "-1"
     access_token = jwt.create_access_token(identity=user['name'])
-    session[access_token] = [user['_id'], user['email']]
+
+    # Store user ID and email in session as a tuple
+    session['user_info'] = (user['_id'], user['email']) # userId is ObjectId() in this
 
     return access_token
 
 def userLogout(access_token):
-    res = session.pop(access_token, None)
+    res = session.pop('user_info', None)
     if res is None:
         return jsonify(message="error: token does not exist"), 400
     return jsonify(message="logged out"), 200
