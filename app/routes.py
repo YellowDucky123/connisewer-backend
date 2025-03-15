@@ -8,6 +8,7 @@ from . import App  # Ensure this is after Flask is created
 from .action import user
 from .action import toilet
 from .action import auth
+from .action import review
 
 CORS(App, origins=["http://localhost:3000", "https://connisewer.vercel.app"])
 
@@ -77,7 +78,10 @@ def makeReview():
     return "success"
 
 
-    
+@App.route('/reviews/toiletId=<id>', methods=['GET'])
+def getToiletwithId(id):
+    return review.searchByToiletId(id)
+
 #
 # # user deletes a review
 # @App.route('/', methods=['DELETE'])
