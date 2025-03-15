@@ -1,4 +1,4 @@
-from flask import request
+from flask import jsonify, request
 from flask_cors import CORS
 from .database import client, database
 from .utils import to_json
@@ -42,11 +42,19 @@ for c in collection_list:
 # add a user
 @App.route('/user/add', methods=['POST'])
 def registerUser():
-    name = request.args['name']
-    email = request.args['email']
-    password = request.args['password']
-    user.register(name, email, password)
-    return "success"
+    data = request.json
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
+
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not username or not email or not password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    user.register(username, email, password)
+    return jsonify({"message": "success"}), 201
 
 # # delete a user
 # @App.route('/', methods=['DELETE'])
