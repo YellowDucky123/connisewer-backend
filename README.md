@@ -24,7 +24,7 @@ The database contain the following collecions:
     _id: ObjectId,
     title: string,
     description: string,
-    location: [float, float],
+    location: [float, float], // lat, long
     ratings: [ObjectId],
     reviews: [ObjectId]
 }
