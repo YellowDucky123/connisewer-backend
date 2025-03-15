@@ -1,4 +1,4 @@
-from app.database import users, toilets
+from app.database import users, toilets, reviews
 from flask import jsonify
 from app.utils import id_query
 from bson import ObjectId
@@ -20,6 +20,9 @@ def register(name, email, password):
     if token == '-1':
         return jsonify(message='registration failed'), 400
     return jsonify(access_token=token), 200
+
+def get_reviews(id):
+    return reviews.find({ "user": id} ).limit(20)
     
 
 def delete(id, email):

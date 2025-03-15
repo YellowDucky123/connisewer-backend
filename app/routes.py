@@ -68,6 +68,10 @@ def updateReview():
 def getById(id):
     return to_json(user.find_by_id(id))
 
+
+@App.route('/user/id=<id>/reviews', methods=['GET'])
+def get_reviews(id):
+    return to_json(user.get_reviews(id))
 # # delete a user
 # @App.route('/', methods=['DELETE'])
 # def deleteUser():
