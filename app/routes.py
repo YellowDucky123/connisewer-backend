@@ -140,7 +140,11 @@ def ratingGet(rating):
 # user login
 def login():
     try:
-        data = request.get_json()  # Use JSON instead of request.form
+        data = request.json
+        
+        if not data:
+            return jsonify({"error": "Invalid request"}), 400
+        
         email = data.get("email")
         password = data.get("password")
 

@@ -25,13 +25,10 @@ def authentication(email, password):
             return jsonify({"message": "User data not found"}), 404
 
         # Create a JWT token
-        access_token = create_access_token(identity=user["name"])
-
-        # Store user ID and email in session
-        session["user_info"] = (str(user["_id"]), user["email"])  # Ensure _id is a string
-
-        return jsonify(access_token=access_token), 200
-
+        token = makeToken(email)
+        if token == '-1':
+            return jsonify(message='Invalid credentials'), 400
+        return jsonify(access_token=token)
     return jsonify({"message": "Invalid credentials"}), 401
 
 def addNewUserData(email, password):
