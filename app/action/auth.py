@@ -6,13 +6,6 @@ from flask_jwt_extended import JWTManager, create_access_token
 from app import App
 from hashlib import sha256
 
-# Setup Flask-Session (use server-side sessions)
-jwt = JWTManager(App)
-
-App.config["SESSION_PERMANENT"] = False
-App.config["SESSION_TYPE"] = "filesystem"  
-Session(App)  # Initialize the session extension
-
 
 # return json
 def authentication(email, password):
