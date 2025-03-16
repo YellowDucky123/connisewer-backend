@@ -106,9 +106,9 @@ def deleteUser():
 # user makes a review
 @App.route('/user/post-review', methods=['POST'])
 def makeReview():
-    sess = session.get('user_info')
-    if not sess:
-        return jsonify(message='you are not logged in'), 401
+    # sess = session.get('user_info')
+    # if not sess:
+    #     return jsonify(message='you are not logged in'), 401
     
     user_id = sess[0]
     toilet_id = int(request.form["toilet_id"])
