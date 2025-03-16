@@ -60,23 +60,40 @@ def registerUser():
 # update a review from a user
 @App.route('/user/edit', methods=['PUT'])
 def updateReview():
-    id = request.args['review_id']
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
+    id = sess[0]
     text = request.args['text']
     rating = request.args['rating']
+    
     return user.change_review(id, text, rating)
 
 # search for a user based on their user id
 @App.route('/user/id=<id>', methods=['GET'])
 def getById(id):
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
     return to_json(user.find_by_id(id))
 
 # get reviews by a certain user
 @App.route('/user/id=<id>/reviews', methods=['GET'])
 def get_user_reviews(id):
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
     return to_json(user.get_reviews(id))
 
 @App.route('/toilet/id=<id>/reviews', methods=['GET'])
 def get_toilet_reviews(id):
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
     return to_json(toilet.get_reviews(id))
 
 # delete a user
@@ -100,16 +117,25 @@ def deleteUser():
 # user makes a review
 @App.route('/user/post-review', methods=['POST'])
 def makeReview():
-    user_id = request.args["user_id"]
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
+    user_id = sess[0]
     toilet_id = request.args["toilet_id"]
     text = request.args["text"]
     rating = int(request.args["rating"])
+
     user.post_review(user_id, toilet_id, text, rating)
     return "success"
 
 # get all reviews that has the toilet id and avg rating
 @App.route('/reviews/toiletId=<id>', methods=['GET'])
 def getToiletwithId(id):
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
     return to_json(review.searchByToiletId(id))
 
 
@@ -130,11 +156,19 @@ def getToiletwithId(id):
 # search for toilets on position
 @App.route('/toilets/minLat=<minLat>/minLong=<minLong>/maxLat=<maxLat>/maxLong=<maxLong>', methods=['GET'])
 def retrieveToilet(minLat, minLong, maxLat, maxLong):
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
     return to_json(toilet.getToilet(minLat, minLong, maxLat, maxLong))
 
 # get a toilet based on rating
 @App.route('/toilets/rating=<rating>', methods=['GET'])
 def ratingGet(rating):
+    sess = session.get('user_info')
+    if not sess:
+        return jsonify(message='you are not logged in'), 401
+    
     return to_json(toilet.searchByRating(rating))
 
 # #---------------------------------------------------------------------------------------#

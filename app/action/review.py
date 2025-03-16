@@ -1,5 +1,5 @@
 from app.database import reviews
-from flask import jsonify
+from flask import jsonify, session
 from datetime import datetime
 
 def create_review(user_id, toilet_id, text, rating):

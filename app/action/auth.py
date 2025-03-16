@@ -30,6 +30,7 @@ def authentication(email, password):
         if token == '-1':  # Token generation failed
             return jsonify(message='Invalid credentials'), 400
 
+        session['user_info'] = (user['_id'], user['email']) # userId is ObjectId() in this
         return jsonify(access_token=token), 200
 
     return jsonify({"message": "Invalid credentials"}), 401
