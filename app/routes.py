@@ -41,22 +41,6 @@ for c in collection_list:
 #------------------------------------ USER ROUTES --------------------------------------#
 #---------------------------------------------------------------------------------------#
 
-# add a user
-@App.route('/user/register', methods=['POST'])
-def registerUser():
-    data = request.json
-    if not data:
-        return jsonify({"error": "Invalid request"}), 400
-
-    username = data.get('username')
-    email = data.get('email')
-    password = data.get('password')
-
-    if not username or not email or not password:
-        return jsonify({"error": "Missing fields"}), 400
-
-    return user.register(username, email, password)
-
 # returns everything, including the reviews
 @App.route('/user/info/id=<id>', methods=['GET'])
 def user_info(id):
@@ -175,6 +159,23 @@ def ratingGet(rating):
 # #---------------------------------------------------------------------------------------#
 # #------------------------------------ AUTH ROUTES --------------------------------------#
 # #---------------------------------------------------------------------------------------#
+
+# add a user
+@App.route('/auth/register', methods=['POST'])
+def registerUser():
+    data = request.json
+    if not data:
+        return jsonify({"error": "Invalid request"}), 400
+
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not username or not email or not password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    return user.register(username, email, password)
+
 
 # user login
 @App.route('/auth/login', methods=['POST'])
