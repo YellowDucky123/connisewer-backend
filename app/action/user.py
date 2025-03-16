@@ -1,6 +1,6 @@
 from app.database import users, toilets, reviews, authUsers
 from flask import jsonify
-from app.utils import id_query
+from app.utils import id_query, to_json
 from bson import ObjectId
 from . import review, rating, auth
 
@@ -15,11 +15,11 @@ def find_by_id(id):
 
 def register(name, email, password):
     auth.addNewUserData(email, password)
-    users.insert_one({"name": name, "email": email}).inserted_id
+    id = users.insert_one({"name": name, "email": email}).inserted_id
     token = auth.makeToken(email)
     if token == '-1':
         return jsonify(message='registration failed'), 400
-    return jsonify(access_token=token), 200
+    return to_json(get_info(id)), 200
 
 def get_reviews(id):
     return reviews.find({ "user": id} ).limit(20)
