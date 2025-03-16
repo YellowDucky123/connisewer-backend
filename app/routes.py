@@ -107,10 +107,11 @@ def makeReview():
     user.post_review(user_id, toilet_id, text, rating)
     return "success"
 
-# get all reviews that has the toilet id
+# get all reviews that has the toilet id and avg rating
 @App.route('/reviews/toiletId=<id>', methods=['GET'])
 def getToiletwithId(id):
     return to_json(review.searchByToiletId(id))
+
 
 #
 # # user deletes a review

@@ -14,7 +14,24 @@ def delete_review(review_id):
     return reviews.delete_one({"_id": review_id})
 
 def searchByToiletId(toiletId):
+    avg = None
     r = reviews.find({"toilet": int(toiletId)})
-    print(r)
-    return r
+    reviews_processed = list(
+        reviews.aggregate([
+        {
+            "$match": {
+                "toilet": int(toiletId)
+            } 
+        },
+        {
+            "$group": {
+                "_id": None,
+                "avg": { "$avg": "$rating" }
+            }
+        }
+        ])
+    )
+    if reviews_processed:
+        avg = reviews_processed[0]['avg']
+    return {"reviews": r, "average": avg}
 
