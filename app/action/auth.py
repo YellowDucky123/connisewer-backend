@@ -11,25 +11,31 @@ jwt = JWTManager(App)
 
 # return json
 def authentication(email, password):
+    # Find the user in the authentication database
     userData = authUsers.find_one({"email": email})
 
     if not userData:
         return jsonify({"message": "User not found"}), 404
 
+    # Hash the input password for comparison
     hashed_pass = sha256(password.encode('utf-8')).hexdigest()
 
-    if hashed_pass == userData["password"]:
-        user = users.find_one({"email": email})
+    if hashed_pass == userData["password"]:  # Password matches
+        user = users.find_one({"email": email})  # Get user details
 
         if not user:
             return jsonify({"message": "User data not found"}), 404
 
-        # Create a JWT token
+        # Generate JWT token
         token = makeToken(email)
-        if token == '-1':
+
+        if token == '-1':  # Token generation failed
             return jsonify(message='Invalid credentials'), 400
-        return jsonify(access_token=token)
+
+        return jsonify(access_token=token), 200
+
     return jsonify({"message": "Invalid credentials"}), 401
+
 
 def addNewUserData(email, password):
     hashed_pass = sha256(password.encode('utf-8')).hexdigest()
