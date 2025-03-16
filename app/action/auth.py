@@ -7,8 +7,6 @@ from hashlib import sha256
 # Setup Flask-Session (use server-side sessions)
 jwt = JWTManager(App)
 
-# Initialize Flask-Session
-
 # return json
 def authentication(email, password):
     # Find the user in the authentication database

@@ -124,6 +124,9 @@ def getToiletwithId(id):
 # #---------------------------------------------------------------------------------------#
 #
 
+
+
+
 # search for toilets on position
 @App.route('/toilets/minLat=<minLat>/minLong=<minLong>/maxLat=<maxLat>/maxLong=<maxLong>', methods=['GET'])
 def retrieveToilet(minLat, minLong, maxLat, maxLong):
