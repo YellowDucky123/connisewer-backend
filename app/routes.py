@@ -57,6 +57,11 @@ def registerUser():
 
     return user.register(username, email, password)
 
+# returns everything, including the reviews
+@App.route('/user/info/id=<id>', methods=['GET'])
+def user_info(id):
+    return to_json(user.get_info(id))
+
 # update a review from a user
 @App.route('/user/edit', methods=['PUT'])
 def updateReview():
@@ -70,7 +75,7 @@ def updateReview():
     
     return user.change_review(id, text, rating)
 
-# search for a user based on their user id
+# search for a user based on their user id, does not have reviews (refer to user_info())
 @App.route('/user/id=<id>', methods=['GET'])
 def getById(id):
     sess = session.get('user_info')
@@ -200,6 +205,3 @@ def login():
 def logout():
     return auth.userLogout()
 
-@App.route('/user/info/id=<id>', methods=['GET'])
-def user_info(id):
-    return to_json(user.get_info(id))
