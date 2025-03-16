@@ -62,26 +62,26 @@ def updateReview():
 # search for a user based on their user id, does not have reviews (refer to user_info())
 @App.route('/user/id=<id>', methods=['GET'])
 def getById(id):
-    sess = session.get('user_info')
-    if not sess:
-        return jsonify(message='you are not logged in'), 401
+    # sess = session.get('user_info')
+    # if not sess:
+    #     return jsonify(message='you are not logged in'), 401
     
     return to_json(user.find_by_id(id))
 
 # get reviews by a certain user
 @App.route('/user/id=<id>/reviews', methods=['GET'])
 def get_user_reviews(id):
-    sess = session.get('user_info')
-    if not sess:
-        return jsonify(message='you are not logged in'), 401
+    # sess = session.get('user_info')
+    # if not sess:
+    #     return jsonify(message='you are not logged in'), 401
     
     return to_json(user.get_reviews(id))
 
 @App.route('/toilet/id=<id>/reviews', methods=['GET'])
 def get_toilet_reviews(id):
-    sess = session.get('user_info')
-    if not sess:
-        return jsonify(message='you are not logged in'), 401
+    # sess = session.get('user_info')
+    # if not sess:
+    #     return jsonify(message='you are not logged in'), 401
     
     return to_json(toilet.get_reviews(id))
 
