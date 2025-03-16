@@ -1,6 +1,6 @@
 from app.database import users, database, authUsers
 from app.utils import to_json
-from .user import get_info
+from app.action import user as u
 from flask import Flask, session, jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token
 from app import App
@@ -33,7 +33,7 @@ def authentication(email, password):
             return jsonify(message='Invalid credentials'), 400
 
         session['user_info'] = (user['_id'], user['email']) # userId is ObjectId() in this
-        return to_json(get_info(user['_id'])), 200
+        return to_json(u.get_info(user['_id'])), 200
 
     return jsonify({"message": "Invalid credentials"}), 401
 
