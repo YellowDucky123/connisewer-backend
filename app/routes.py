@@ -111,9 +111,9 @@ def makeReview():
         return jsonify(message='you are not logged in'), 401
     
     user_id = sess[0]
-    toilet_id = request.args["toilet_id"]
-    text = request.args["text"]
-    rating = int(request.args["rating"])
+    toilet_id = int(request.form["toilet_id"])
+    text = request.form["text"]
+    rating = int(request.form["rating"])
 
     user.post_review(user_id, toilet_id, text, rating)
     return "success"
