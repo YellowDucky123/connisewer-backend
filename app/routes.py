@@ -138,6 +138,7 @@ def ratingGet(rating):
 # #---------------------------------------------------------------------------------------#
 
 # user login
+@App.route('/user/login', methods=['POST'])
 def login():
     try:
         data = request.json
