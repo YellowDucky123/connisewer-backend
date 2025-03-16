@@ -137,10 +137,6 @@ def makeReview():
 # get all reviews that has the toilet id and avg rating
 @App.route('/reviews/toiletId=<id>', methods=['GET'])
 def getToiletwithId(id):
-    sess = session.get('user_info')
-    if not sess:
-        return jsonify(message='you are not logged in'), 401
-    
     return to_json(review.searchByToiletId(id))
 
 
@@ -204,4 +200,3 @@ def login():
 @App.route('/auth/logout', methods=['DELETE'])
 def logout():
     return auth.userLogout()
-
