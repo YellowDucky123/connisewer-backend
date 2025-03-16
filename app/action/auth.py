@@ -1,7 +1,7 @@
 from app.database import users, database, authUsers
 from app.utils import to_json
 from app.action import user as u
-from flask import Flask, session, jsonify, request, Session
+from flask import Flask, session, jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token
 from app import App
 from hashlib import sha256
