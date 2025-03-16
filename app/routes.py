@@ -142,7 +142,7 @@ def ratingGet(rating):
 # #---------------------------------------------------------------------------------------#
 
 # user login
-@App.route('/user/login', methods=['POST'])
+@App.route('/auth/login', methods=['POST'])
 def login():
     try:
         data = request.json
@@ -162,6 +162,10 @@ def login():
         return jsonify({"error": str(e)}), 500
 
 # user logout
-@App.route('/user/logout', methods=['DELETE'])
+@App.route('/auth/logout', methods=['DELETE'])
 def logout():
     return auth.userLogout()
+
+@App.route('/user/info/id=<id>', methods=['GET'])
+def user_info(id):
+    return to_json(user.get_info(id))

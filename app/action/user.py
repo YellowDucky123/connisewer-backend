@@ -42,3 +42,10 @@ def change_review(review_id, text, rating):
         return jsonify(message="change failed to process"), 400
     return jsonify(message="review changed/updated"), 200
 
+def get_info(id):
+    out = users.find_one(id_query(id))
+    out["reviews"] =  reviews.find({ "user": id })
+
+    return out
+
+
